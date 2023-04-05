@@ -1,6 +1,6 @@
 class Phone:
     phone_number = 0
-    __call_counter = 0
+    _call_counter = 0
 
     def add_number(self, num):
         self.phone_number = num
