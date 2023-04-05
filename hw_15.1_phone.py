@@ -6,8 +6,8 @@ class Phone:
         self.phone_number = num
 
     def number_calls(self):
-        return self.__call_counter
+        return self._call_counter
 
     def take_call(self):
-        self.__call_counter += 1
+        self._call_counter += 1
 
