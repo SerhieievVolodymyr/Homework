@@ -24,3 +24,39 @@ class Chessman:
 
     def try_change_place(self):
         raise NotImplementedError
+
+
+class Knight(Chessman):
+    def try_change_place(self):
+        pass
+        # TODO: add functionality
+
+
+class Pawn(Chessman):
+    def try_change_place(self):
+        pass
+        # TODO: add functionality
+
+
+class King(Chessman):
+    def try_change_place(self):
+        pass
+        # TODO: add functionality
+
+
+class Queen(Chessman):
+    def try_change_place(self):
+        pass
+        # TODO: add functionality
+
+
+class Rook(Chessman):
+    def try_change_place(self):
+        pass
+        # TODO: add functionality
+
+
+class Bishop(Chessman):
+    def try_change_place(self):
+        pass
+    # TODO: add functionality
