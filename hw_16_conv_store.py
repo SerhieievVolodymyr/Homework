@@ -30,7 +30,10 @@ class ShoppingCart:
     def add_product(self, product, quantity=None):
         if quantity is None:
             quantity = product.unit
-        self._products.update({product: quantity})
+        if product in self._products:
+            self._products[product] += quantity
+        else:
+            self._products.update({product: quantity})
 
     def get_total(self):
         total = 0
@@ -40,6 +43,17 @@ class ShoppingCart:
 
     def purchased(self):
         self.__purchased = True
+
+    def get_products(self):
+        return self._products
+
+    def remove_product(self, product):
+        self._products.pop(product)
+
+    def sub_product(self, product, quantity):
+        self._products[product] -= quantity
+        if self._products[product] <= 0:
+            self._products.pop(product)
 
     def __float__(self):
         return float(self.get_total())
@@ -52,13 +66,16 @@ class ShoppingCart:
             return False
 
     def __eq__(self, other):
-        return self._products == other._products
+        return self.get_products() == other.get_products()
 
     def __len__(self):
         return len(self._products)
 
     def __getitem__(self, item):
         return item, self._products[item]
+
+    def __iter__(self):
+        return iter(self._products.items())
 
 
 class PaymentValidator:
@@ -113,26 +130,3 @@ class CardPaymentProcessor(CodeValidator, PaymentProcessor):
         else:
             print('Виникла помилка')
 
-
-if __name__ == '__main__':
-    apple = Product('apple', 1200, 1)
-    peach = Product('peach', 3000, 1.0)
-    cart1 = ShoppingCart()
-    cart1.add_product(apple)
-    cart1.add_product(peach, 3.5)
-    cart2 = ShoppingCart()
-    cart2.add_product(apple)
-    cart2.add_product(peach, 3.4)
-    print(str(apple))
-    print(float(apple))
-    print(float(cart2))
-    print(cart1 == cart2)
-    print(apple == peach)
-
-    # card_processor = CardPaymentProcessor(1234)
-    # card_processor.purchase(cart1)
-    # cash_processor = CashPaymentProcessor()
-    # cash_processor.purchase(cart1)  # Error
-    #
-    # cash_processor2 = CashPaymentProcessor()
-    # cash_processor2.purchase(cart2)
