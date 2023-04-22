@@ -7,14 +7,17 @@ class Product:
     def __repr__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
     def __float__(self):
-        return float(self.price)
+        return self.price / 100
 
     def __eq__(self, other):
         return self.price == other.price and self.unit == other.unit and self.name == other.name
 
     def __hash__(self):
-        return id(self)
+        return hash(self.name)
 
     def get_total(self, quantity: int | float | None = None) -> int:
         if quantity is None:
@@ -101,7 +104,7 @@ class CodeValidator(PaymentValidator):
         self.security_code = security_code
 
     def is_valid(self):
-        client_code = int(input('Введіть код клієнта: '))
+        client_code = input('Введіть код клієнта: ')
         if client_code == self.security_code:
             return True
         else:
