@@ -23,7 +23,8 @@ def play():
                     player.attack(enemy)
                 except exceptions.EnemyDown:
                     print(f'ENEMY LEVEL {enemy_level} IS DEFEATED')
-                    enemy = models.Enemy(enemy_level + 1)
+                    enemy_level += 1
+                    enemy = models.Enemy(enemy_level)
                     print(f'NEW ENEMY LEVEL {enemy.level}')
                 if not player.last_attack:
                     break
